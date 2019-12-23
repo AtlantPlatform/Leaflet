@@ -1,6 +1,6 @@
 
-import {Control} from './Control';
-import {Map} from '../map/Map';
+import { Control } from './Control';
+import { Map } from '../map/Map';
 import * as DomUtil from '../dom/DomUtil';
 import * as DomEvent from '../dom/DomEvent';
 
@@ -37,13 +37,13 @@ export var Zoom = Control.extend({
 
 	onAdd: function (map) {
 		var zoomName = 'leaflet-control-zoom',
-		    container = DomUtil.create('div', zoomName + ' leaflet-bar'),
-		    options = this.options;
+			container = DomUtil.create('div', zoomName + ' leaflet-bar'),
+			options = this.options;
 
-		this._zoomInButton  = this._createButton(options.zoomInText, options.zoomInTitle,
-		        zoomName + '-in',  container, this._zoomIn);
+		this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
+			zoomName + '-in', container, this._zoomIn);
 		this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
-		        zoomName + '-out', container, this._zoomOut);
+			zoomName + '-out', container, this._zoomOut);
 
 		this._updateDisabled();
 		map.on('zoomend zoomlevelschange', this._updateDisabled, this);
@@ -69,13 +69,13 @@ export var Zoom = Control.extend({
 
 	_zoomIn: function (e) {
 		if (!this._disabled && this._map._zoom < this._map.getMaxZoom()) {
-			this._map.zoomIn(this._map.options.zoomDelta * (e.shiftKey ? 3 : 1), 'user.zoomin');
+			this._map.zoomIn(this._map.options.zoomDelta * (e.shiftKey ? 3 : 1), null, 'user.zoomin');
 		}
 	},
 
 	_zoomOut: function (e) {
 		if (!this._disabled && this._map._zoom > this._map.getMinZoom()) {
-			this._map.zoomOut(this._map.options.zoomDelta * (e.shiftKey ? 3 : 1), 'user.zoomout');
+			this._map.zoomOut(this._map.options.zoomDelta * (e.shiftKey ? 3 : 1), null, 'user.zoomout');
 		}
 	},
 
@@ -101,7 +101,7 @@ export var Zoom = Control.extend({
 
 	_updateDisabled: function () {
 		var map = this._map,
-		    className = 'leaflet-disabled';
+			className = 'leaflet-disabled';
 
 		DomUtil.removeClass(this._zoomInButton, className);
 		DomUtil.removeClass(this._zoomOutButton, className);

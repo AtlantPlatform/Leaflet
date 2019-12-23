@@ -1,5 +1,5 @@
 /* @preserve
- * Leaflet 1.6.0+event-source-action.061893e, a JS library for interactive maps. http://leafletjs.com
+ * Leaflet 1.6.0+event-source-action.fcbf786, a JS library for interactive maps. http://leafletjs.com
  * (c) 2010-2019 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 
@@ -9,7 +9,7 @@
 	(factory((global.L = {})));
 }(this, (function (exports) { 'use strict';
 
-var version = "1.6.0+event-source-action.061893e1";
+var version = "1.6.0+event-source-action.fcbf786b";
 
 /*
  * @namespace Util
@@ -5383,13 +5383,13 @@ var Zoom = Control.extend({
 
 	onAdd: function (map) {
 		var zoomName = 'leaflet-control-zoom',
-		    container = create$1('div', zoomName + ' leaflet-bar'),
-		    options = this.options;
+			container = create$1('div', zoomName + ' leaflet-bar'),
+			options = this.options;
 
-		this._zoomInButton  = this._createButton(options.zoomInText, options.zoomInTitle,
-		        zoomName + '-in',  container, this._zoomIn);
+		this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
+			zoomName + '-in', container, this._zoomIn);
 		this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
-		        zoomName + '-out', container, this._zoomOut);
+			zoomName + '-out', container, this._zoomOut);
 
 		this._updateDisabled();
 		map.on('zoomend zoomlevelschange', this._updateDisabled, this);
@@ -5415,13 +5415,13 @@ var Zoom = Control.extend({
 
 	_zoomIn: function (e) {
 		if (!this._disabled && this._map._zoom < this._map.getMaxZoom()) {
-			this._map.zoomIn(this._map.options.zoomDelta * (e.shiftKey ? 3 : 1), 'user.zoomin');
+			this._map.zoomIn(this._map.options.zoomDelta * (e.shiftKey ? 3 : 1), null, 'user.zoomin');
 		}
 	},
 
 	_zoomOut: function (e) {
 		if (!this._disabled && this._map._zoom > this._map.getMinZoom()) {
-			this._map.zoomOut(this._map.options.zoomDelta * (e.shiftKey ? 3 : 1), 'user.zoomout');
+			this._map.zoomOut(this._map.options.zoomDelta * (e.shiftKey ? 3 : 1), null, 'user.zoomout');
 		}
 	},
 
@@ -5447,7 +5447,7 @@ var Zoom = Control.extend({
 
 	_updateDisabled: function () {
 		var map = this._map,
-		    className = 'leaflet-disabled';
+			className = 'leaflet-disabled';
 
 		removeClass(this._zoomInButton, className);
 		removeClass(this._zoomOutButton, className);
